@@ -17,6 +17,7 @@ var feedbackEl = document.getElementById("feedback");
 var sfxRight = new Audio("assets/sfx/correct.wav");
 var sfxWrong = new Audio("assets/sfx/incorrect.wav");
 
+
 function clockTick() {//used in setInterval in startQuiz, controls time and quiz end
     // update time
     time--;
@@ -31,6 +32,8 @@ function clockTick() {//used in setInterval in startQuiz, controls time and quiz
 startBtn.onclick = startQuiz;
 
 function startQuiz() {
+
+    $("#start-screen").hide();
     var startScreen = document.getElementById("start-screen");//holds start screen that's visible
 
     startScreen.setAttribute("class", "hide");//hides start screen by adding hide class from css = display: none.
@@ -46,10 +49,28 @@ function startQuiz() {
     getQuestions();
 }
 
-/*
+//kill quiz and timer
+function quizEnd() {
+    console.log("CALLED QUIZ END" , currentQuestionIndex)
+    $("#questions").hide()
+    $("#end-screen").show()
+    if (questions[currentQuestionIndex] === 4 || time === 0) {
+        clearInterval(timerId);
+        showScore();
+        //show score function initialize here.
+    }
+}
 
-put quizEnd function here to terminate timer 
-                                                  */
+function showScore() {
+    $("#end-screen").show();
+    //clear screen. display none.
+    //ask user for initials.
+    // load scores from local
+   
+    //save scores to local storage.
+
+     //show score list of intitals and score.
+}
 
 function getQuestions() {
     var currentQuestion = questions[currentQuestionIndex];// var currentQuestionIndex = 0;
@@ -77,9 +98,12 @@ function getQuestions() {
         //display on the page
         choicesEl.appendChild(choiceOption);
     });
+
+   
 }
 function questionClick() {
     console.log(this);
+    console.log( currentQuestionIndex)
     //check if user guess is wrong
     if(this.value !== questions[currentQuestionIndex].answer) {
         feedbackEl.textContent = "Wrong!!";
@@ -87,9 +111,12 @@ function questionClick() {
         feedbackEl.textContent = "Correct!!";
     }
     currentQuestionIndex++;
+    console.log( currentQuestionIndex)
+    if(currentQuestionIndex > 4 ) return  quizEnd();
 
     if(currentQuestionIndex === questions.length) {
-        alert("Quiz is over!");//quizEnd() goes here.
+       // alert("Quiz is over!");
+        quizEnd();
 
     }else {
         getQuestions();
