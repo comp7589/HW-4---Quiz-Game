@@ -3,6 +3,7 @@
 ## Installation
 
 An application that will run in the browser and feature dynamically updated HTML and CSS powered by Javascript code. Application features polished UI and is responsive, ensuring adaptation to multiple screen sizes.
+
 [Code Quiz](https://comp7589.github.io/PasswordGenerator/)
 
 ## Usage

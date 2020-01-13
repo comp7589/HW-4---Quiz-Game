@@ -2,20 +2,20 @@
 var currentQuestionIndex = 0; //*
 var time = questions.length * 15; //*
 var timerId;
-// var score = 0;
+var highScores = [];
 // variables to reference DOM elements
 var questionsEl = document.getElementById("questions");  //**
 var timerEl = document.getElementById("time");  //*
 var choicesEl = document.getElementById("choices");  //*
 var submitBtn = document.getElementById("submit");  //*
 var startBtn = document.getElementById("start");  //*
-// var scoreEl = document.getElementById("score")
+var scoreEl = document.getElementById("score")
 //bonus shit
 var initialsEl = document.getElementById("initials");
 var feedbackEl = document.getElementById("feedback");
-// sound effects
+/* sound effects
 var sfxRight = new Audio("assets/sfx/correct.wav");
-var sfxWrong = new Audio("assets/sfx/incorrect.wav");
+var sfxWrong = new Audio("assets/sfx/incorrect.wav");*/
 
 
 function clockTick() {//used in setInterval in startQuiz, controls time and quiz end
@@ -59,6 +59,7 @@ function quizEnd() {
         showScore();
         //show score function initialize here.
     }
+    score = time;
 }
 
 function showScore() {
@@ -67,11 +68,16 @@ function showScore() {
     //ask user for initials.
     $("#intials").show();
     // load scores from local
-   
-    //save scores to local storage.
+   var storedScores = JSON.parse(localStorage.getItem("highScores"));
 
+   if (storedScores !== null){
+       highScores = storedScores;
+   }
+
+    //save scores to local storage.
+    localStorage.setItem("highScores", JSON.stringify(highScores));
      //show score list of intitals and score.
-     
+
 }
 
 function getQuestions() {
