@@ -65,11 +65,13 @@ function showScore() {
     $("#end-screen").show();
     //clear screen. display none.
     //ask user for initials.
+    $("#intials").show();
     // load scores from local
    
     //save scores to local storage.
 
      //show score list of intitals and score.
+     
 }
 
 function getQuestions() {
