@@ -8,7 +8,7 @@ An application that will run in the browser and feature dynamically updated HTML
 
 ## Usage
 
-A timed code quiz with multiple-choice questions. User may take a timed quiz on JavaScript fundamentals that stores high scores, so that user can gauge progress compared to peers.
+A timed code quiz with multiple-choice questions. User may take a timed quiz on JavaScript fundamentals that stores high scores, so that user can gauge progress compared to peers. When user answers questions incorrectly, THEN fifteen seconds is subtracted from the timer. When the game is over user can save initials and score.
 
 ## Credits
 
