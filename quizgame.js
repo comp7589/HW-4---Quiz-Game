@@ -59,14 +59,14 @@ function quizEnd() {
         showScore();
         //show score function initialize here.
     }
-    score = time;
+    score = time;//Functionality INCORRECT****
 }
 
 function showScore() {
     $("#end-screen").show();
     //clear screen. display none.
     //ask user for initials.
-    $("#intials").show();
+    $("#intials").hide();
     // load scores from local
    var storedScores = JSON.parse(localStorage.getItem("highScores"));
 
@@ -115,6 +115,7 @@ function questionClick() {
     //check if user guess is wrong
     if(this.value !== questions[currentQuestionIndex].answer) {
         feedbackEl.textContent = "Wrong!!";
+        time -= 15;
     }else {
         feedbackEl.textContent = "Correct!!";
     }
