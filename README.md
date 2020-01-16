@@ -1,4 +1,4 @@
-# Unit 03 JavaScript Homework: Password Generator
+# Unit 04 WEB APIs - Homework: Code Quiz
 
 ## Installation
 
