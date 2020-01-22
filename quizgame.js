@@ -9,7 +9,7 @@ var timerEl = document.getElementById("time");  //*
 var choicesEl = document.getElementById("choices");  //*
 var submitBtn = document.getElementById("submit");  //*
 var startBtn = document.getElementById("start");  //*
-var scoreEl = document.getElementById("score")
+var scoreEl = document.getElementById("final-score")
 //bonus shit
 var initialsEl = document.getElementById("initials");
 var feedbackEl = document.getElementById("feedback");
@@ -51,32 +51,36 @@ function startQuiz() {
 
 //kill quiz and timer
 function quizEnd() {
-    console.log("CALLED QUIZ END" , currentQuestionIndex)
-    $("#questions").hide()
-    $("#end-screen").show()
+    console.log("CALLED QUIZ END", currentQuestionIndex)
+    $("#feedback").hide();
+    $("#questions").hide();
+    $("#end-screen").show();
+
     if (questions[currentQuestionIndex] === 4 || time === 0) {
-        clearInterval(timerId);
-        showScore();
-        //show score function initialize here.
+        clearInterval(timerId);// Kill timer when clock is zero.
+        showScore();//show score function initialize here.
     }
-    score = time;//Functionality INCORRECT****
+
+    scoreEl.textContent = time;//set time equal to score.
+    clearInterval(timerId);//Kill timer when quiz is complete.
 }
 
-function showScore() {
+function showScore() { //****need to correct functionality. */
+    
     $("#end-screen").show();
     //clear screen. display none.
     //ask user for initials.
     $("#intials").hide();
     // load scores from local
-   var storedScores = JSON.parse(localStorage.getItem("highScores"));
+    var storedScores = JSON.parse(localStorage.getItem("highScores"));
 
-   if (storedScores !== null){
-       highScores = storedScores;
-   }
+    if (storedScores !== null) {
+        highScores = storedScores;
+    }
 
     //save scores to local storage.
     localStorage.setItem("highScores", JSON.stringify(highScores));
-     //show score list of intitals and score.
+    //show score list of intitals and score.
 
 }
 
@@ -107,27 +111,27 @@ function getQuestions() {
         choicesEl.appendChild(choiceOption);
     });
 
-   
+
 }
 function questionClick() {
     console.log(this);
-    console.log( currentQuestionIndex)
+    console.log(currentQuestionIndex)
     //check if user guess is wrong
-    if(this.value !== questions[currentQuestionIndex].answer) {
+    if (this.value !== questions[currentQuestionIndex].answer) {
         feedbackEl.textContent = "Wrong!!";
         time -= 15;
-    }else {
+    } else {
         feedbackEl.textContent = "Correct!!";
     }
     currentQuestionIndex++;
-    console.log( currentQuestionIndex)
-    if(currentQuestionIndex > 4 ) return  quizEnd();
+    console.log(currentQuestionIndex)
+    if (currentQuestionIndex > 4) return quizEnd();
 
-    if(currentQuestionIndex === questions.length) {
-       // alert("Quiz is over!");
+    if (currentQuestionIndex === questions.length) {
+        // alert("Quiz is over!");
         quizEnd();
 
-    }else {
+    } else {
         getQuestions();
     }
 }
