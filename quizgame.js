@@ -64,7 +64,7 @@ function quizEnd() {
     clearInterval(timerId);//Kill timer when quiz is complete.
 }
 
-function showScore() { /* NEED TO CORRECT FUNCTIONALITY! */
+function showScore() { 
     
     $("#end-screen").show();
     //clear screen. display none.

@@ -15,3 +15,5 @@ function highScores() {
 
 }
 highScores();
+
+//wire clear highscores list button function here.
