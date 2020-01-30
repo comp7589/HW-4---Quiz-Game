@@ -2,7 +2,6 @@
 var currentQuestionIndex = 0; //*
 var time = questions.length * 15; //*
 var timerId;
-var highScores = [];
 // variables to reference DOM elements
 var questionsEl = document.getElementById("questions");  //**
 var timerEl = document.getElementById("time");  //*
@@ -65,24 +64,33 @@ function quizEnd() {
     clearInterval(timerId);//Kill timer when quiz is complete.
 }
 
-function showScore() { //****need to correct functionality. */
+function showScore() { /* NEED TO CORRECT FUNCTIONALITY! */
     
     $("#end-screen").show();
     //clear screen. display none.
     //ask user for initials.
     $("#intials").hide();
-    // load scores from local
-    var storedScores = JSON.parse(localStorage.getItem("highScores"));
 
-    if (storedScores !== null) {
-        highScores = storedScores;
+    
+    var initials = initialsEl.value.trim();
+    console.log(initials);
+
+    if (initials !== "") {
+        
+        var highScores = JSON.parse(window.localStorage.getItem("highScores")) || [];
+        
+        var highScoreObject = {
+            score: time,
+            initials: initials
+        }
+
+        highScores.push(highScoreObject);
+        localStorage.setItem("highScores", JSON.stringify(highScores));
+        console.log(time);
+        window.location.href = "highScores.html";//page redirect.
     }
-
-    //save scores to local storage.
-    localStorage.setItem("highScores", JSON.stringify(highScores));
-    //show score list of intitals and score.
-
 }
+submitBtn.onclick = showScore;
 
 function getQuestions() {
     var currentQuestion = questions[currentQuestionIndex];// var currentQuestionIndex = 0;
